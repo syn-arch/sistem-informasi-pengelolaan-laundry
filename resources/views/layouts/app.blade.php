@@ -47,9 +47,9 @@
                 <div class="top-left-part">
                     <a class="logo" href="/dashboard">
                         <!-- Logo icon image, you can use font-icon also -->
-                        <b><img src="plugins/images/eliteadmin-logo.png" alt="home" /></b>
+                        <b><img src="{{ asset('eliteadmin/plugins/images/eliteadmin-logo.png')}}" alt="home" /></b>
                         <!-- Logo text image you can use text also -->
-                        <span class="hidden-xs"><img src="plugins/images/eliteadmin-text.png" alt="home" /></span>
+                        <span class="hidden-xs"><img src="{{ asset('eliteadmin/plugins/images/eliteadmin-text.png')}}" alt="home" /></span>
                     </a>
                 </div>
                 <!-- /Logo -->
@@ -63,7 +63,7 @@
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <!-- .user dropdown -->
                     <li class="dropdown">
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">{{Auth::user()->name}}</b> </a>
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="{{ asset('eliteadmin/plugins/images/users/varun.jpg')}}" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">{{Auth::user()->name}}</b> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
                             <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
@@ -96,7 +96,7 @@
                     </li>
                     <!-- User profile-->
                     <li class="user-pro">
-                        <a href="#" class="waves-effect"><img src="plugins/images/users/varun.jpg" alt="user-img" class="img-circle"> <span class="hide-menu"> {{Auth::user()->name}}<span class="fa arrow"></span></span>
+                        <a href="#" class="waves-effect"><img src="{{ asset('eliteadmin/plugins/images/users/varun.jpg')}}" alt="user-img" class="img-circle"> <span class="hide-menu"> {{Auth::user()->name}}<span class="fa arrow"></span></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <li><a href="javascript:void(0)"><i class="ti-user"></i> My Profile</a></li>
@@ -116,8 +116,8 @@
                             <li><a href="/member">Data Member</a></li>
                         </ul>
                     </li>
-                    <li><a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe01a;" class="linea-icon linea-basic  fa-fw"></i> <span class="hide-menu">Transaksi Baru </span></a> </li>
-                    <li><a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe025;" class="linea-icon linea-basic  fa-fw"></i> <span class="hide-menu">Data Transaksi </span></a> </li>
+                    <li><a href="/transaksi/transaksi_baru" class="waves-effect"><i data-icon="&#xe01a;" class="linea-icon linea-basic  fa-fw"></i> <span class="hide-menu">Transaksi Baru </span></a> </li>
+                    <li><a href="/transaksi" class="waves-effect"><i data-icon="&#xe025;" class="linea-icon linea-basic  fa-fw"></i> <span class="hide-menu">Data Transaksi </span></a> </li>
                     <li>
                         <a href="javascript:void(0)" class="waves-effect"><i data-icon="r" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Laporan<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">

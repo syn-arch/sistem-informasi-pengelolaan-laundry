@@ -46,3 +46,5 @@ Route::get('/member/get_member/{id}', 'MemberController@get_member');
 Route::post('/member/update/{id}', 'MemberController@update');
 Route::get('/member/destroy/{id}', 'MemberController@destroy');
 
+// transaksi
+Route::get('/transaksi/transaksi_baru', 'TransaksiController@transaksi_baru');

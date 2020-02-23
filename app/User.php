@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','alamat','telepon','level'
+        'name', 'email', 'password','alamat','telepon','level', 'id_outlet'
     ];
 
     /**
@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
+
+    public function outlet()
+    {
+        return $this->belongsTo(Outlet::class, 'id_outlet');
+    }
 }
