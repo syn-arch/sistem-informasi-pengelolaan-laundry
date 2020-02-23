@@ -18,6 +18,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('eliteadmin/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ asset('eliteadmin/plugins/bower_components/bootstrap-extension/css/bootstrap-extension.css')}}" rel="stylesheet">
+    <link href="{{ asset('eliteadmin/plugins/bower_components/datatables/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
     <!-- This is Sidebar menu CSS -->
     <link href="{{ asset('eliteadmin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css')}}" rel="stylesheet">
     <!-- This is a Animation CSS -->
@@ -25,6 +27,9 @@
     <!-- This is a Custom CSS -->
     <link href="{{ asset('eliteadmin/css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('eliteadmin/css/colors/blue.css')}}" id="theme" rel="stylesheet">
+
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
@@ -101,11 +106,11 @@
                     </li>
                     <!-- User profile-->
                     <li class="nav-small-cap m-t-10">&nbsp;&nbsp;&nbsp;&nbsp;Main Menu</li>
-                    <li><a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe00b;" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Dashboard </span></a> </li>
+                    <li><a href="/dashboard" class="waves-effect"><i data-icon="&#xe00b;" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Dashboard </span></a> </li>
                     <li>
                         <a href="javascript:void(0)" class="waves-effect"><i data-icon="&#xe001;" class="linea-icon linea-basic fa-fw"></i> <span class="hide-menu">Master Data<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="/users">Data User</a></li>
+                            <li><a href="/user">Data User</a></li>
                             <li><a href="/outlet">Data Outlet</a></li>
                             <li><a href="/paket">Data Paket</a></li>
                             <li><a href="/member">Data Member</a></li>
@@ -170,6 +175,9 @@
 <script src="{{ asset('eliteadmin/js/waves.js')}}"></script>
 <!-- Custom Theme JavaScript -->
 <script src="{{ asset('eliteadmin/js/custom.min.js')}}"></script>
+<!-- DataTables -->
+<script src="{{ asset('eliteadmin/plugins/bower_components/datatables/jquery.dataTables.min.js')}}"></script>
+@include('sweet::alert')
+@stack('js')
 </body>
-
 </html>
