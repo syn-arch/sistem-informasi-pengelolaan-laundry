@@ -30,3 +30,19 @@ Route::get('/outlet/get_outlet/{id}', 'OutletController@get_outlet');
 Route::post('/outlet/update/{id}', 'OutletController@update');
 Route::get('/outlet/destroy/{id}', 'OutletController@destroy');
 
+
+// paket
+Route::get('/paket', 'PaketController@index');
+Route::post('/paket/store', 'PaketController@store');
+Route::get('/paket/get_paket/{id}', 'PaketController@get_paket');
+Route::post('/paket/update/{id}', 'PaketController@update');
+Route::get('/paket/destroy/{id}', 'PaketController@destroy');
+
+
+// member
+Route::get('/member', 'MemberController@index');
+Route::post('/member/store', 'MemberController@store');
+Route::get('/member/get_member/{id}', 'MemberController@get_member');
+Route::post('/member/update/{id}', 'MemberController@update');
+Route::get('/member/destroy/{id}', 'MemberController@destroy');
+

@@ -6,10 +6,10 @@
 	<div class="col-md-12">
 		<div class="white-box">
 			<div class="pull-left">
-				<h3 class="box-title">Data User</h3>
+				<h3 class="box-title">Data outlet</h3>
 			</div>
 			<div class="pull-right">
-				<button type="button" data-toggle="modal" data-target="#user-modal" class="btn btn-primary tambah-user"><i class="fa fa-plus"></i> Tambah User</button>
+				<button type="button" data-toggle="modal" data-target="#outlet-modal" class="btn btn-primary tambah-outlet"><i class="fa fa-plus"></i> Tambah outlet</button>
 			</div>
 			<br><br><br>
 			<div class="box-body">
@@ -28,26 +28,22 @@
 							<tr>
 								<th>No</th>
 								<th>Nama</th>
-								<th>Email</th>
 								<th>Alamat</th>
 								<th>Telepon</th>
-								<th>Level</th>
 								<th><i class="fa fa-gear"></i></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php $no=1; ?>
-							@foreach($user as $row)
+							@foreach($outlet as $row)
 							<tr>
 								<td>{{$no++}}</td>
-								<td>{{$row->name}}</td>
-								<td>{{$row->email}}</td>
+								<td>{{$row->nama_outlet}}</td>
 								<td>{{$row->alamat}}</td>
 								<td>{{$row->telepon}}</td>
-								<td>{{$row->level}}</td>
 								<td>
-									<a href="#user-modal" data-toggle="modal" data-id="{{$row->id}}" class="btn btn-warning ubah-user"><i class="fa fa-edit"></i></a>
-									<a href="/user/destroy/{{$row->id}}" class="btn btn-danger hapus-user"><i class="fa fa-trash"></i></a>
+									<a href="#outlet-modal" data-toggle="modal" data-id="{{$row->id}}" class="btn btn-warning ubah-outlet"><i class="fa fa-edit"></i></a>
+									<a href="/outlet/destroy/{{$row->id}}" class="btn btn-danger hapus-outlet"><i class="fa fa-trash"></i></a>
 								</td>
 							</tr>
 							@endforeach
@@ -60,22 +56,22 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="user-modal" tabindex="-1">
+<div class="modal fade" id="outlet-modal" tabindex="-1">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h5 class="modal-title" id="exampleModalLongTitle">Data User</h5>
+				<h5 class="modal-title" id="exampleModalLongTitle">Data outlet</h5>
 			</div>
 			<div class="modal-body">
-				<form action="/user/store" method="post" class="form-user">
+				<form action="/outlet/store" method="post" class="form-outlet">
 					@csrf
 					<div class="form-group">
-						<label for="name">Nama User</label>
-						<input type="text" class="form-control name" name="name" id="name" placeholder="Nama User" value="{{ old('name') }}">
-						@error('name')
+						<label for="nama_outlet">Nama outlet</label>
+						<input type="text" class="form-control nama_outlet" name="nama_outlet" id="nama_outlet" placeholder="Nama outlet" value="{{ old('nama_outlet') }}">
+						@error('nama_outlet')
 						<small style="color:red">{{$message}}</small>
 						@enderror
 					</div>
@@ -87,41 +83,9 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="email">E-mail</label>
-						<input type="email" class="form-control email" name="email" id="email" placeholder="E-mail" value="{{ old('email') }}">
-						@error('email')
-						<small style="color:red">{{$message}}</small>
-						@enderror
-					</div>
-					<div class="form-group">
 						<label for="telepon">Telepon</label>
 						<input type="text" class="form-control telepon" name="telepon" id="telepon" placeholder="Telepon" value="{{ old('telepon') }}">
 						@error('telepon')
-						<small style="color:red">{{$message}}</small>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="id_outlet">Outlet</label>
-						<select name="id_outlet" id="id_outlet" class="form-control id_outlet">
-							<option value="pilih_outlet">-- Pilih Outlet --</option>
-							@foreach($outlet as $row)
-							<option value="{{$row->id}}">{{$row->nama_outlet}}</option>
-							@endforeach
-						</select>
-						@error('id_outlet')
-						<small style="color:red">{{$message}}</small>
-						@enderror
-					</div>
-					
-					<div class="form-group">
-						<label for="level">Level</label>
-						<select name="level" id="level" class="form-control level">
-							<option value="pilih_level">-- Pilih Level --</option>
-							<option value="Admin">Admin</option>
-							<option value="Kasir">Kasir</option>
-							<option value="Owner">Owner</option>
-						</select>
-						@error('level')
 						<small style="color:red">{{$message}}</small>
 						@enderror
 					</div>
@@ -145,7 +109,7 @@
 
 		$('.tables').DataTable()
 
-		$('.hapus-user').click(function(e){
+		$('.hapus-outlet').click(function(e){
 			e.preventDefault();
 
 			var link = $(this).attr('href')
@@ -167,30 +131,30 @@
 
 		})
 
-		$('.tambah-user').click(function(){
-			$('.name').val('')
+		$('.tambah-outlet').click(function(){
+			$('.nama_outlet').val('')
 			$('.alamat').val('')
 			$('.telepon').val('')
 			$('.email').val('')
 			$('.level').val('pilih_level')
 			$('.id_outlet').val('pilih_outlet')
-			$('.form-user').attr('action','/user/store')
+			$('.form-outlet').attr('action','/outlet/store')
 		})
 
-		$('.ubah-user').click(function(){
+		$('.ubah-outlet').click(function(){
 			var id = $(this).data('id')
 			$.ajax({
-				url : '/user/get_user/' + id,
+				url : '/outlet/get_outlet/' + id,
 				data : {id : id},
 				success: function(data){
-					user =  JSON.parse(data)
-					$('.name').val(user.name)
-					$('.alamat').val(user.alamat)
-					$('.telepon').val(user.telepon)
-					$('.email').val(user.email)
-					$('.level').val(user.level)
-					$('.id_outlet').val(user.id_outlet)
-					$('.form-user').attr('action','/user/update/'+id)
+					outlet =  JSON.parse(data)
+					$('.nama_outlet').val(outlet.nama_outlet)
+					$('.alamat').val(outlet.alamat)
+					$('.telepon').val(outlet.telepon)
+					$('.email').val(outlet.email)
+					$('.level').val(outlet.level)
+					$('.id_outlet').val(outlet.id_outlet)
+					$('.form-outlet').attr('action','/outlet/update/'+id)
 				}
 			})
 		})
