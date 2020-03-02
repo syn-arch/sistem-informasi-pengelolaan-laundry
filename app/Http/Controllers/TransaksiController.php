@@ -154,13 +154,17 @@ class TransaksiController extends Controller
             $det->save();
         }
 
-        return redirect('/transaksi/invoice');
+        $id_transaksi_next = Transaksi::max('id');
+
+        return redirect('/transaksi/invoice/' . $id_transaksi_next);
     }
 
-    public function invoice()
+    public function invoice($id)
     {
         $data['judul'] = "Invoice";
+        $data['data'] = Transaksi::find($id);
+        $data['detail'] = DetailTransaksi::where('id_transaksi', $id)->get();
 
-        return view('transaksi.faktur', $data);
+        return view('transaksi.invoice', $data);
     }
 }

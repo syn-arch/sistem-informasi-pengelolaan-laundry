@@ -52,6 +52,7 @@
 									<th>Harga</th>
 									<th>Qty</th>
 									<th>Jumlah Harga</th>
+									<th>Keterangan</th>
 								</tr>
 							</thead>
 						</table>
@@ -289,7 +290,8 @@
 			{ 
 				data : 'jumlah_harga',
 				render: $.fn.dataTable.render.number( ',', '.', 2, 'Rp. ' )
-			}
+			},
+			{ data : 'keterangan'}
 			]
 		})
 

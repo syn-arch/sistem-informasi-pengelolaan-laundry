@@ -55,7 +55,8 @@ Route::get('/transaksi/batal', 'TransaksiController@batal');
 Route::get('/transaksi/hitung_total', 'TransaksiController@hitung_total');
 
 // invoice
-Route::get('/transaksi/invoice', 'TransaksiController@invoice');
+Route::get('/transaksi/invoice/{id}', 'TransaksiController@invoice');
+Route::get('/transaksi/cetak_invoice/{id}', 'TransaksiController@cetak_invoice');
 
 // data transaksi
 Route::get('/transaksi', 'TransaksiController@index');
