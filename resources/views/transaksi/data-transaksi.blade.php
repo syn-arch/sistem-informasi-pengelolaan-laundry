@@ -42,7 +42,8 @@
                                 <td>{{$row->total_bayar}}</td>
                                 <td>{{$row->status}}</td>
                                 <td>
-                                    <a href="/transaksi/detail_transaksi/{{$row->id}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                    <a href="/transaksi/invoice/{{$row->id}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                    <a href="#modal-aksi" data-toggle="modal" class="btn btn-warning"><i class="fa fa-edit"></i></a>
                                     <a href="/transaksi/destroy/{{$row->id}}" class="btn btn-danger hapus-transaksi"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>

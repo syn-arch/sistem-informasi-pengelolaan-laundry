@@ -116,14 +116,12 @@ class TransaksiController extends Controller
 
         if ($record) {
             $invoiceArr = explode('-', $record->kode_invoice);
-
             if ( empty($invoiceArr[0]) ){
                 $kode_invoice = date('Y').'-0001';
             } else {
                 $next = sprintf('%04s', $invoiceArr[1] + 1);
                 $kode_invoice = $invoiceArr[0] . '-' . $next;
             }
-
         }else{
             $kode_invoice = date('Y') . '-0001';
         }
@@ -166,5 +164,14 @@ class TransaksiController extends Controller
         $data['detail'] = DetailTransaksi::where('id_transaksi', $id)->get();
 
         return view('transaksi.invoice', $data);
+    }
+
+    public function cetak_invoice($id)
+    {
+        $data['judul'] = "Cetak Invoice";
+        $data['data'] = Transaksi::find($id);
+        $data['detail'] = DetailTransaksi::where('id_transaksi', $id)->get();
+
+        return view('transaksi.cetak_invoice', $data);
     }
 }

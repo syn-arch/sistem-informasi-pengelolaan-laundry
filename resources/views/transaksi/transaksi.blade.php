@@ -176,7 +176,7 @@
 						@csrf
 						<div class="form-group">
 							<label for="id_paket">Nama Paket</label>
-							<select name="id_paket" id="id_paket" class="form-control">
+							<select name="id_paket" id="id_paket" class="form-control id_paket">
 								<option value="pilih_paket">-- Pilih Paket --</option>
 								@foreach($paket as $row)
 								<option value="{{$row->id}}">{{$row->nama_paket}}</option>
@@ -185,14 +185,14 @@
 						</div>
 						<div class="form-group">
 							<label for="qty">Qty</label>
-							<input type="number" class="form-control" name="qty" placeholder="Qty">
+							<input type="number" class="form-control qty" name="qty" placeholder="Qty">
 							@error('qty')
 							<small style="color:red">{{$message}}</small>
 							@enderror
 						</div>
 						<div class="form-group">
 							<label for="keterangan">Keterangan</label>
-							<textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control" placeholder="Keterangan"></textarea>
+							<textarea name="keterangan" id="keterangan" cols="30" rows="10" class="form-control keterangan" placeholder="Keterangan"></textarea>
 						</div>
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary btn-block">Submit</button>
@@ -289,7 +289,7 @@
 			{ data : 'qty'},
 			{ 
 				data : 'jumlah_harga',
-				render: $.fn.dataTable.render.number( ',', '.', 2, 'Rp. ' )
+				render: $.fn.dataTable.render.number(',', '.', 2, 'Rp. ')
 			},
 			{ data : 'keterangan'}
 			]
@@ -334,6 +334,10 @@
 						success : function(data){
 							$('.total').text(data)
 							$('.total_bayar').val(data)
+
+							$('.id_paket').val('pilih_paket')
+							$('.qty').val('')
+							$('.keterangan').text('')
 						}
 					})
 
