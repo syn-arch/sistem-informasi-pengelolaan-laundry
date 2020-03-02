@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+Route::get('/home', 'DashboardController@index');
 Route::get('/dashboard', 'DashboardController@index');
 
 // users
@@ -38,7 +39,6 @@ Route::get('/paket/get_paket/{id}', 'PaketController@get_paket');
 Route::post('/paket/update/{id}', 'PaketController@update');
 Route::get('/paket/destroy/{id}', 'PaketController@destroy');
 
-
 // member
 Route::get('/member', 'MemberController@index');
 Route::post('/member/store', 'MemberController@store');
@@ -48,3 +48,14 @@ Route::get('/member/destroy/{id}', 'MemberController@destroy');
 
 // transaksi
 Route::get('/transaksi/transaksi_baru', 'TransaksiController@transaksi_baru');
+Route::post('/transaksi/transaksi_baru', 'TransaksiController@store');
+Route::post('/transaksi/tambah_paket', 'TransaksiController@tambah_paket');
+Route::get('/transaksi/getdetailTransaksi', 'TransaksiController@getdetailTransaksi');
+Route::get('/transaksi/batal', 'TransaksiController@batal');
+Route::get('/transaksi/hitung_total', 'TransaksiController@hitung_total');
+
+// invoice
+Route::get('/transaksi/invoice', 'TransaksiController@invoice');
+
+// data transaksi
+Route::get('/transaksi', 'TransaksiController@index');

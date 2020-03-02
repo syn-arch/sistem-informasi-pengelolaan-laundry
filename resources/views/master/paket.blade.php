@@ -39,7 +39,7 @@
 							@foreach($paket as $row)
 							<tr>
 								<td>{{$no++}}</td>
-								<td>{{$row->id_outlet}}</td>
+								<td>{{$row->outlet->nama_outlet}}</td>
 								<td>{{$row->nama_paket}}</td>
 								<td>{{$row->jenis}}</td>
 								<td>{{"Rp. " . number_format($row->harga)}}</td>

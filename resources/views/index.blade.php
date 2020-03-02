@@ -85,14 +85,15 @@
             </div>
         </div>
         <!-- Welcome thumb -->
-        <div class="welcome-thumb wow fadeInDown" data-wow-delay="0.5s">
-            <img src="{{ asset('frontend/img/bg-img/welcome-img.png')}}" alt="">
+        <div class="welcome-thumb wow fadeInDown" data-wow-delay="0.5s" >
+            <img src="{{ asset('frontend/img/bg-img/app.png')}}" alt="">
         </div>
     </section>
     <!-- ***** Wellcome Area End ***** -->
 
     <!-- ***** Special Area Start ***** -->
     <section class="special-area bg-white section_padding_100" id="about">
+        <div class="" style="margin-top: 70px"></div>
         <div class="container">
             <div class="row">
                 <div class="col-12">

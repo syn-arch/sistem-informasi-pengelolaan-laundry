@@ -136,6 +136,6 @@ class UserController extends Controller
 
     public function get_user($id)
     {
-        echo json_encode(User::find($id));
+        echo json_encode("SELECT * FROM USER WHERE id = '$id' ");
     }
 }

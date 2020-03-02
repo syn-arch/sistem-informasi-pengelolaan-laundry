@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('eliteadmin/plugins/images/favicon.png')}}">
     <title>{{$judul}}</title>
@@ -28,15 +29,16 @@
     <link href="{{ asset('eliteadmin/css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('eliteadmin/css/colors/blue.css')}}" id="theme" rel="stylesheet">
 
-     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+     <script src="{{asset('js/sweetalert.min.js')}}"></script>
 
 </head>
 
 <body>
     <!-- Preloader -->
-    <div class="preloader">
+    <!-- <div class="preloader">
         <div class="cssload-speeding-wheel"></div>
-    </div>
+    </div> -->
+    
     <div id="wrapper">
         <!-- Top Navigation -->
         <nav class="navbar navbar-default navbar-static-top m-b-0">

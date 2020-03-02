@@ -32,6 +32,7 @@
 								<th>Alamat</th>
 								<th>Telepon</th>
 								<th>Level</th>
+								<th>Outlet</th>
 								<th><i class="fa fa-gear"></i></th>
 							</tr>
 						</thead>
@@ -45,6 +46,7 @@
 								<td>{{$row->alamat}}</td>
 								<td>{{$row->telepon}}</td>
 								<td>{{$row->level}}</td>
+								<td>{{$row->outlet->nama_outlet}}</td>
 								<td>
 									<a href="#user-modal" data-toggle="modal" data-id="{{$row->id}}" class="btn btn-warning ubah-user"><i class="fa fa-edit"></i></a>
 									<a href="/user/destroy/{{$row->id}}" class="btn btn-danger hapus-user"><i class="fa fa-trash"></i></a>

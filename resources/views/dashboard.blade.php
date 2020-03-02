@@ -47,13 +47,13 @@
 			<div class="col-md-6">
 				<div class="white-box text-center bg-purple">
 					<h1 class="text-white counter">165</h1>
-					<p class="text-white">jumlah member</p>
+					<p class="text-white">JUMLAH MEMBER</p>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="white-box text-center bg-info">
 					<h1 class="text-white counter">2065</h1>
-					<p class="text-white">total transaksi berhasil</p>
+					<p class="text-white">TRANSAKSI BERHASIL</p>
 				</div>
 			</div>
 		</div>

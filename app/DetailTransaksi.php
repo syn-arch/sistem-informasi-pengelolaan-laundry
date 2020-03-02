@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DetailTransaksi extends Model
 {
     protected $table = 'detail_transaksi';
-    protected $fillable = ['id_transaksi','id_paket','qty','keterangan'];
+    protected $fillable = ['id_transaksi','id_paket','qty','keterangan','status', 'jumlah_harga'];
     public $timestamps = false;
 
     public function transaksi()
