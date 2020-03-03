@@ -60,3 +60,7 @@ Route::get('/transaksi/cetak_invoice/{id}', 'TransaksiController@cetak_invoice')
 
 // data transaksi
 Route::get('/transaksi', 'TransaksiController@index');
+Route::get('/transaksi/destroy/{id}', 'TransaksiController@destroy');
+Route::get('/transaksi/get_transaksi/{id}', 'TransaksiController@get_transaksi');
+Route::get('/transaksi/ubah_status/{id}/{status}', 'TransaksiController@ubah_status');
+Route::post('/transaksi/bayar_transaksi/{id}', 'TransaksiController@bayar_transaksi');

@@ -18,9 +18,13 @@
 			width: 10%;
 		}
 
+		td {
+			font-size: 11px;
+		}
+
 	</style>
 </head>
-<body onload="window.print()">
+<body>
 	<div class="container">
 		<table border="1" cellpadding="10" cellspacing="0" class="my-table">
 			<tr>
@@ -32,21 +36,20 @@
 				</td>
 			</tr>
 			<tr>
-				<th>Invoice</th>
-				<td>{{$data->kode_invoice}}</td>
-				<td colspan="4" rowspan="4"></td>
+				<th colspan="2">Invoice</th>
+				<td colspan="4">{{$data->kode_invoice}}</td>
 			</tr>
 			<tr>
-				<th>Tanggal</th>
-				<td>{{date('d/m/Y', strtotime($data->tgl))}}</td>
+				<th colspan="2">Tanggal</th>
+				<td colspan="4">{{date('d/m/Y', strtotime($data->tgl))}}</td>
 			</tr>
 			<tr>
-				<th>Nama Member</th>
-				<td>{{$data->member->nama_member}}</td>
+				<th colspan="2">Nama Member</th>
+				<td colspan="4">{{$data->member->nama_member}}</td>
 			</tr>
 			<tr>
-				<th>Status</th>
-				<td>{{$data->dibayar}}</td>
+				<th colspan="2">Status</th>
+				<td colspan="4">{{$data->dibayar}}</td>
 			</tr>
 			<tr>
 				<th>No</th>
@@ -68,7 +71,7 @@
 				</tr>
 				<?php endforeach ?>
 			<tr>
-				<td colspan="4" rowspan="4">
+				<td colspan="4" rowspan="{{$data->dibayar == 'Dibayar' ? '6' : '4'}}">
 					<strong>Catatan :</strong>
 					<p>
 						Bawa struk ini ketika hendak mengambil cucian, terima kasih telah mempercayakan cucian anda kepada kami.
@@ -76,6 +79,14 @@
 				</td>
 				<th>Pajak</th>
 				<td>{{"Rp. " . number_format($data->pajak) }}</td>
+			</tr>
+			<tr>
+				<th>Diskon(%)</th>
+				<td>{{$data->diskon}}</td>
+			</tr>
+			<tr>
+				<th>Biaya Tambahan</th>
+				<td>{{"Rp. " . number_format($data->biaya_tambahan)}}</td>
 			</tr>
 			<tr>
 				<th>Total Bayar</th>
@@ -88,7 +99,7 @@
 			</tr>
 			<tr>
 				<th>Kembalian</th>
-				<td>{{"Rp. " . ($data->tunai - $data->total_bayar)}}</td>
+				<td>{{"Rp. " . number_format($data->tunai - $data->total_bayar)}}</td>
 			</tr>
 			@endif
 		</tbody>

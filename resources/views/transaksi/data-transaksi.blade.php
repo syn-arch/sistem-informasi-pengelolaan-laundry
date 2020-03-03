@@ -24,11 +24,12 @@
                             <tr>
                                 <th>No</th>
                                 <th>Invoice</th>
-                                <th>Nama Member</th>
+                                <th>Member</th>
                                 <th>Tanggal</th>
                                 <th>Total Bayar</th>
+                                <th>Dibayar</th>
                                 <th>Status</th>
-                                <th><i class="fa fa-gear"></i></th>
+                                <th><i class="fa fa-gears"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,124 +40,163 @@
                                 <td>{{$row->kode_invoice}}</td>
                                 <td>{{$row->member->nama_member}}</td>
                                 <td>{{$row->tgl}}</td>
-                                <td>{{$row->total_bayar}}</td>
-                                <td>{{$row->status}}</td>
+                                <td>{{"Rp. " . number_format($row->total_bayar)}}</td>
                                 <td>
-                                    <a href="/transaksi/invoice/{{$row->id}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
-                                    <a href="#modal-aksi" data-toggle="modal" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                    <a href="/transaksi/destroy/{{$row->id}}" class="btn btn-danger hapus-transaksi"><i class="fa fa-trash"></i></a>
+                                    <span class="label label-{{$row->dibayar == 'Dibayar' ? 'success' : 'danger' }}">
+                                        {{$row->dibayar}}
+                                    </span>
                                 </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                <td>
+                                    <select data-id="{{$row->id}}" name="status" class="ubah_status label label-<?php if($row->status == "Baru"){
+                                            echo 'success';
+                                       }elseif($row->status == "Proses"){
+                                            echo 'warning';
+                                        }elseif($row->status == "Selesai"){
+                                            echo 'info';
+                                        }elseif($row->status == "Diambil"){
+                                            echo 'primary';
+                                        }?>">
+                                               <option value="Baru" {{$row->status == 'Baru' ? 'selected' : ''}}>Baru</option>
+                                               <option value="Proses" {{$row->status == 'Proses' ? 'selected' : ''}}>Proses</option>
+                                               <option value="Selesai" {{$row->status == 'Selesai' ? 'selected' : ''}}>Selesai</option>
+                                               <option value="Diambil" {{$row->status == 'Diambil' ? 'selected' : ''}}>Diambil</option>
+                                           </select>
+                                       </td>
+                                       <td>
+                                        <a href="/transaksi/invoice/{{$row->id}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                        <a href="#bayar-modal" data-toggle="modal" data-id="{{$row->id}}" class="btn btn-primary bayar {{$row->dibayar == 'Belum Dibayar' ?: 'disabled'}}"><i class="fa fa-dollar"></i></a>
+                                        <a href="/transaksi/destroy/{{$row->id}}" class="btn btn-danger hapus-transaksi"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="transaksi-modal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h5 class="modal-title" id="exampleModalLongTitle">Data transaksi</h5>
-            </div>
-            <div class="modal-body">
-                <form action="/transaksi/store" method="post" class="form-transaksi">
-                    @csrf
-                    <div class="form-group">
-                        <label for="nama_transaksi">Nama transaksi</label>
-                        <input type="text" class="form-control nama_transaksi" name="nama_transaksi" id="nama_transaksi" placeholder="Nama transaksi" value="{{ old('nama_transaksi') }}">
-                        @error('nama_transaksi')
-                        <small style="color:red">{{$message}}</small>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="jk">Jenis Kelamin</label>
-                        <select name="jk" id="jk" class="form-control jk">
-                            <option value="pilih_jenis">-- Pilih Jenis Kelamin --</option>
-                            <option value="L">Laki-laki</option>
-                            <option value="P">Perempuan</option>
-                        </select>
-                        @error('jk')
-                        <small style="color:red">{{$message}}</small>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <textarea name="alamat" id="alamat" cols="20" rows="10" class="form-control alamat" placeholder="Alamat"></textarea>
-                        @error('alamat')
-                        <small style="color:red">{{$message}}</small>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="telepon">Telepon</label>
-                        <input type="text" class="form-control telepon" name="telepon" id="telepon" placeholder="Telepon" value="{{ old('telepon') }}">
-                        @error('telepon')
-                        <small style="color:red">{{$message}}</small>
-                        @enderror
-                    </div>
+    <div class="modal fade" id="bayar-modal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">Bayar Transaksi</h4>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-info">Submit</button>
-                </form>
+                <div class="modal-body">
+                    <form class="form-bayar" method="POST">
+                        @csrf
+                        <div class="form-group" id="total-bayar">
+                            <label for="total_bayar">Total Bayar</label>
+                            <input type="text" class="form-control total_bayar" name="total_bayar" id="total_bayar" placeholder="Total Bayar" readonly>
+                            @error('total_bayar')
+                            <small style="color:red">{{$message}}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group" id="tunai">
+                            <label for="tunai">Tunai</label>
+                            <input type="text" class="form-control tunai" autocomplete="off" name="tunai" id="tunai" placeholder="Tunai">
+                            @error('tunai')
+                            <small style="color:red">{{$message}}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group" id="kembalian">
+                            <label for="kembalian">Kembalian</label>
+                            <input type="text" class="form-control kembalian" name="kembalian" id="kembalian" placeholder="Kembalian" readonly>
+                            @error('kembalian')
+                            <small style="color:red">{{$message}}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="javascript:void(0)" data-dismiss="modal" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
 
-@push('js')
-<script>
+    @endsection
 
-    $(function(){
+    @push('js')
+    <script>
 
-        $('.tables').DataTable()
+        $(function(){
 
-        $('.hapus-transaksi').click(function(e){
-            e.preventDefault()
-            var link = $(this).attr('href')
-            swal({
-                title: "Apakah anda yakin?",
-                text: "Data yang dihapus tidak dapat dikembalikan",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
+            $('.tables').DataTable()
+
+            $('.tunai').keyup(function(){
+                var tunai = $(this).val()
+                var total = $('.total_bayar').val()
+                var kembalian = tunai - total;
+                $('.kembalian').val(kembalian)
             })
-            .then((willDelete) => {
-                if (willDelete) {
-                    document.location.href = link
-                } else {
-                    swal("Hapus dibatalkan")
+
+            $('.hapus-transaksi').click(function(e){
+                e.preventDefault()
+                var link = $(this).attr('href')
+                swal({
+                    title: "Apakah anda yakin?",
+                    text: "Data yang dihapus tidak dapat dikembalikan",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        document.location.href = link
+                    } else {
+                        swal("Hapus dibatalkan")
+                    }
+                });
+
+            })
+
+            $('.bayar').click(function(){
+                var id = $(this).data('id')
+                $.ajax({
+                    url : '/transaksi/get_transaksi/' + id,
+                    data : {id : id},
+                    success: function(datas){
+                        $('.form-bayar').attr('action', '/transaksi/bayar_transaksi/'+id)
+                        $('.total_bayar').val(datas)
+                    }
+                })
+            })
+
+            $(document).on('change', '.ubah_status', function(){
+                
+                var id = $(this).data('id')
+                var status = $(this).val()
+
+                if (status == 'Baru') {
+                    $(this).attr('class', 'ubah_status label label-success')
                 }
-            });
+
+                if(status == 'Proses'){
+                    $(this).attr('class', 'ubah_status label label-warning')
+                }
+
+                if(status == 'Selesai'){
+                    $(this).attr('class', 'ubah_status label label-info')
+                }
+
+                if(status == 'Diambil'){
+                    $(this).attr('class', 'ubah_status label label-primary')
+                }
+
+                $.ajax({
+                    url : '/transaksi/ubah_status/' + id + '/' + status,
+                    success : function(){
+                        swal('Berhasil', 'Status berhasil diubah', 'success')
+                    }
+                })
+            })
 
         })
-
-        $('.ubah-transaksi').click(function(){
-            var id = $(this).data('id')
-            $.ajax({
-                url : '/transaksi/get_transaksi/' + id,
-                data : {id : id},
-                success: function(data){
-                    transaksi =  JSON.parse(data)
-                    $('.nama_transaksi').val(transaksi.nama_transaksi)
-                    $('.alamat').val(transaksi.alamat)
-                    $('.telepon').val(transaksi.telepon)
-                    $('.jk').val(transaksi.jk)
-                    $('.form-transaksi').attr('action','/transaksi/update/'+id)
-                }
-            })
-        })
-
-    })
-    
-</script>
-
-@endpush
+    </script>
+    @endpush

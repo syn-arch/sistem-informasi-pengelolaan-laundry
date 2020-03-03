@@ -52,7 +52,7 @@
 									<th>Harga</th>
 									<th>Qty</th>
 									<th>Jumlah Harga</th>
-									<th>Keterangan</th>
+									<th>Ket.</th>
 								</tr>
 							</thead>
 						</table>
@@ -91,61 +91,70 @@
 				<h5 class="modal-title" id="exampleModalLongTitle">Konfirmasi Pesanan</h5>
 			</div>
 			<div class="modal-body">
-				<div class="form-group">
-					<label for="batas_waktu">Batas Waktu</label>
-					<input type="datetime-local" class="form-control batas_waktu" name="batas_waktu" id="batas_waktu" placeholder="Batas Waktu" value="{{ old('batas_waktu') }}">
-					@error('batas_waktu')
-					<small style="color:red">{{$message}}</small>
-					@enderror
-				</div>
-				<div class="form-group">
-					<label for="biaya_tambahan">Biaya Tambahan</label>
-					<input type="text" class="form-control biaya_tambahan" name="biaya_tambahan" id="biaya_tambahan" placeholder="Biaya Tambahan" value="{{ old('biaya_tambahan') }}">
-					@error('biaya_tambahan')
-					<small style="color:red">{{$message}}</small>
-					@enderror
-				</div>
-				<div class="form-group">
-					<label for="diskon">Diskon</label>
-					<input type="text" class="form-control diskon" name="diskon" id="diskon" placeholder="Diskon" value="{{ old('diskon') }}">
-					@error('diskon')
-					<small style="color:red">{{$message}}</small>
-					@enderror
-				</div>
-				<div class="form-group">
-					<label for="pajak">Pajak</label>
-					<input type="text" class="form-control pajak" name="pajak" id="pajak" placeholder="Pajak" value="{{ old('pajak') }}">
-					@error('pajak')
-					<small style="color:red">{{$message}}</small>
-					@enderror
-				</div>
-				<div class="form-check">
-					<input class="form-check-input bayar_sekarang" type="checkbox" value="1" id="bayar_sekarang" name="bayar_sekarang">
-					<label class="form-check-label" for="bayar_sekarang">
-						Bayar Sekarang
-					</label>
-				</div>
-				<br>
-				<div class="form-group" id="total-bayar">
-					<label for="total_bayar">Total Bayar</label>
-					<input type="text" class="form-control total_bayar" name="total_bayar" id="total_bayar" placeholder="Total Bayar" value="{{ $total }}" readonly>
-					@error('total_bayar')
-					<small style="color:red">{{$message}}</small>
-					@enderror
-				</div>
-				<div class="form-group" id="tunai">
-					<label for="tunai">Tunai</label>
-					<input type="text" class="form-control tunai" autocomplete="off" name="tunai" id="tunai" placeholder="Tunai" value="{{ old('tunai') }}">
-					@error('tunai')
-					<small style="color:red">{{$message}}</small>
-					@enderror
-				</div>
-				<div class="form-group" id="kembalian">
-					<label for="kembalian">Kembalian</label>
-					<input type="text" class="form-control kembalian" name="kembalian" id="kembalian" placeholder="Kembalian" value="{{ old('kembalian') }}" readonly>
-					@error('kembalian')
-					<small style="color:red">{{$message}}</small>
-					@enderror
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="batas_waktu">Batas Waktu</label>
+							<input type="date" class="form-control batas_waktu" name="batas_waktu" id="batas_waktu" placeholder="Batas Waktu" value="{{ old('batas_waktu') }}">
+							@error('batas_waktu')
+							<small style="color:red">{{$message}}</small>
+							@enderror
+						</div>
+						<div class="form-group">
+							<label for="biaya_tambahan">Biaya Tambahan</label>
+							<input type="text" class="form-control biaya_tambahan" name="biaya_tambahan" id="biaya_tambahan" placeholder="Biaya Tambahan" value="{{ old('biaya_tambahan') }}">
+							@error('biaya_tambahan')
+							<small style="color:red">{{$message}}</small>
+							@enderror
+						</div>
+						<div class="form-group">
+							<label for="diskon">Diskon (%)</label>
+							<input type="text" class="form-control diskon" name="diskon" id="diskon" placeholder="Diskon" value="{{ old('diskon') }}">
+							@error('diskon')
+							<small style="color:red">{{$message}}</small>
+							@enderror
+						</div>
+						<div class="form-group">
+							<label for="pajak">Pajak</label>
+							<input type="text" class="form-control pajak" name="pajak" id="pajak" placeholder="Pajak" value="{{ old('pajak') }}">
+							@error('pajak')
+							<small style="color:red">{{$message}}</small>
+							@enderror
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-check">
+							<input class="form-check-input bayar_sekarang" type="checkbox" value="1" id="bayar_sekarang" name="bayar_sekarang">
+							<label class="form-check-label ml-2" for="bayar_sekarang">
+								Bayar Sekarang
+							</label>
+						</div>
+						<br>
+						<div class="form-group" id="total-bayar">
+							<input type="hidden" name="t_bayar" class="t_bayar" value="{{$total}}">
+							<input type="hidden" name="t_setelah_b_tambahan" class="t_setelah_b_tambahan">
+							<input type="hidden" name="setelah_diskon" class="setelah_diskon">
+							<label for="total_bayar">Total Bayar</label>
+							<input type="text" class="form-control total_bayar" name="total_bayar" id="total_bayar" placeholder="Total Bayar" value="{{ $total }}" readonly>
+							@error('total_bayar')
+							<small style="color:red">{{$message}}</small>
+							@enderror
+						</div>
+						<div class="form-group" id="tunai">
+							<label for="tunai">Tunai</label>
+							<input type="text" class="form-control tunai" autocomplete="off" name="tunai" id="tunai" placeholder="Tunai" value="{{ old('tunai') }}">
+							@error('tunai')
+							<small style="color:red">{{$message}}</small>
+							@enderror
+						</div>
+						<div class="form-group" id="kembalian">
+							<label for="kembalian">Kembalian</label>
+							<input type="text" class="form-control kembalian" name="kembalian" id="kembalian" placeholder="Kembalian" value="{{ old('kembalian') }}" readonly>
+							@error('kembalian')
+							<small style="color:red">{{$message}}</small>
+							@enderror
+						</div>	
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -179,7 +188,7 @@
 							<select name="id_paket" id="id_paket" class="form-control id_paket">
 								<option value="pilih_paket">-- Pilih Paket --</option>
 								@foreach($paket as $row)
-								<option value="{{$row->id}}">{{$row->nama_paket}}</option>
+								<option value="{{$row->id}}">{{$row->nama_paket . "-" . "Rp. " . number_format($row->harga)}}</option>
 								@endforeach
 							</select>
 						</div>
@@ -248,7 +257,6 @@
 		</div>
 	</div>
 </div>
-
 @endsection
 
 @push('js')
@@ -260,7 +268,6 @@
 		$('#total-bayar').hide()
 
 		$('.bayar_sekarang').change(function(){
-
 			if (this.checked) {
 				$('#tunai').show()
 				$('#kembalian').show()
@@ -302,6 +309,35 @@
 			$('.kembalian').val(kembalian)
 		})
 
+		$('.biaya_tambahan').keyup(function(){
+			var biaya_tambahan = $(this).val()
+			var total = $('.t_bayar').val()
+			var total_akhir = parseInt(biaya_tambahan) + parseInt(total)
+
+			$('.total_bayar').val(total_akhir)
+			$('.t_setelah_b_tambahan').val(total_akhir)
+		})
+
+		$('.diskon').keyup(function(){
+			var diskon_persen = $(this).val()
+			
+			var harga = $('.t_setelah_b_tambahan').val()
+
+			var diskon = (parseInt(diskon_persen)/100) * parseInt(harga)
+			var setelah_diskon = parseInt(harga) - parseInt(diskon)
+
+			$('.total_bayar').val(setelah_diskon)
+			$('.setelah_diskon').val(setelah_diskon)
+		})
+
+		$('.pajak').keyup(function(){
+			var pajak = $(this).val()
+			var total = $('.setelah_diskon').val()
+			var total_lagi = parseInt(total) - parseInt(pajak);
+
+			$('.total_bayar').val(total_lagi)
+		})
+
 		$('.pilih-member').click(function(){
 			var id = $(this).data('id')
 			$.ajax({
@@ -334,6 +370,7 @@
 						success : function(data){
 							$('.total').text(data)
 							$('.total_bayar').val(data)
+							$('.t_bayar').val(data)
 
 							$('.id_paket').val('pilih_paket')
 							$('.qty').val('')

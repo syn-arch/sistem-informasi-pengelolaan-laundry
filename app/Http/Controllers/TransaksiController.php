@@ -14,6 +14,7 @@ use DataTables;
 use Alert;
 use Auth;
 use DB;
+use Response;
 
 class TransaksiController extends Controller
 {
@@ -38,7 +39,7 @@ class TransaksiController extends Controller
             $invoiceArr = explode('-', $record->kode_invoice);
 
             if ( empty($invoiceArr[0]) ){
-                $data['kode_invoice'] = date('Y').'-0001';
+                $data['kode_invoice'] = date('Y') . '-0001';
             } else {
                 $next = sprintf('%04s', $invoiceArr[1] + 1);
                 $data['kode_invoice'] = $invoiceArr[0] . '-' . $next;
@@ -130,7 +131,7 @@ class TransaksiController extends Controller
         $trs->id_user = Auth::id();
         $trs->id_outlet = User::find(Auth::id())->id_outlet;
         $trs->id_member = $request->id_member;
-        $trs->tgl = date('Y-m-d H:i:s');
+        $trs->tgl = date('Y-m-d');
         $trs->biaya_tambahan = $request->biaya_tambahan;
         $trs->diskon = $request->diskon;
         $trs->pajak = $request->pajak;
@@ -140,6 +141,7 @@ class TransaksiController extends Controller
         $trs->tunai = $request->tunai;
         if ($request->tunai) {
             $trs->dibayar = 'Dibayar';
+            $trs->tgl_bayar = date('Y-m-d H:i:s');
         }else{
             $trs->dibayar = 'Belum Dibayar';
         }
@@ -173,5 +175,40 @@ class TransaksiController extends Controller
         $data['detail'] = DetailTransaksi::where('id_transaksi', $id)->get();
 
         return view('transaksi.cetak_invoice', $data);
+    }
+
+    public function destroy($id)
+    {
+        Transaksi::find($id)->delete();
+        DetailTransaksi::where('id_transaksi', $id)->delete();
+
+        alert()->success('Data berhasil dihapus', 'Pesan');
+        return redirect('/transaksi');
+    }
+
+    public function ubah_status($id, $status)
+    {
+        $trs = Transaksi::find($id);
+        $trs->status = $status;
+        $trs->save();
+    }
+
+    public function get_transaksi($id)
+    {
+        $total_bayar = Transaksi::find($id)->total_bayar;
+
+        return response()->json($total_bayar);
+    }
+
+    public function bayar_transaksi(Request $request, $id)
+    {
+        $trs = Transaksi::find($id);
+        $trs->tgl_bayar = date('Y-m-d H:i:s');
+        $trs->tunai = $request->tunai;
+        $trs->dibayar = "Dibayar";
+        $trs->save();
+
+        alert()->success('Pembayaran Berhasil', 'Pesan');
+        return redirect('/transaksi');
     }
 }

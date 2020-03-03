@@ -62,6 +62,11 @@
                     <div class="col-md-4 offset-8">
                         <table class="table">
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <th>Sub Total</th>
+                            </tr>
+                            <tr>
                                 <th>Diskon (%)</th>
                                 <td></td>
                                 <td>{{$data->diskon}}</td>
@@ -70,6 +75,11 @@
                                 <th>Pajak</th>
                                 <td></td>
                                 <td>{{"Rp. " . number_format($data->pajak) }}</td>
+                            </tr>
+                            <tr>
+                                <th>Biaya Tambahan</th>
+                                <td></td>
+                                <td>{{"Rp. " . number_format($data->biaya_tambahan) }}</td>
                             </tr>
                             <tr>
                                 <th>Total Bayar</th>
