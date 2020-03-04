@@ -188,7 +188,7 @@
 							<select name="id_paket" id="id_paket" class="form-control id_paket">
 								<option value="pilih_paket">-- Pilih Paket --</option>
 								@foreach($paket as $row)
-								<option value="{{$row->id}}">{{$row->nama_paket . "-" . "Rp. " . number_format($row->harga)}}</option>
+								<option value="{{$row->id}}">{{$row->nama_paket . " --" . "Rp. " . number_format($row->harga)}}</option>
 								@endforeach
 							</select>
 						</div>

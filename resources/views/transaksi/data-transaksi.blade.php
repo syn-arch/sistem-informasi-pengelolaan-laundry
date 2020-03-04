@@ -152,11 +152,10 @@
                     } else {
                         swal("Hapus dibatalkan")
                     }
-                });
-
+                })
             })
 
-            $('.bayar').click(function(){
+            $('#DataTables_Table_0_wrapper').on('click', '.bayar', function(){
                 var id = $(this).data('id')
                 $.ajax({
                     url : '/transaksi/get_transaksi/' + id,

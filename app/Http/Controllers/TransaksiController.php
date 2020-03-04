@@ -15,6 +15,7 @@ use Alert;
 use Auth;
 use DB;
 use Response;
+use PDF;
 
 class TransaksiController extends Controller
 {
@@ -174,7 +175,10 @@ class TransaksiController extends Controller
         $data['data'] = Transaksi::find($id);
         $data['detail'] = DetailTransaksi::where('id_transaksi', $id)->get();
 
-        return view('transaksi.cetak_invoice', $data);
+        $pdf = PDF::loadview('transaksi.cetak_invoice', $data);
+        return $pdf->stream();
+
+        // return view('transaksi.cetak_invoice', $data);
     }
 
     public function destroy($id)

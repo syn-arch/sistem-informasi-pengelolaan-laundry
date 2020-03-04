@@ -6,7 +6,7 @@
 	<style>
 		* {
 			font-family: arial;
-			font-size: 12px;
+			font-size: 10px;
 		}
 
 		.container {
@@ -18,15 +18,11 @@
 			width: 10%;
 		}
 
-		td {
-			font-size: 11px;
-		}
-
 	</style>
 </head>
 <body>
 	<div class="container">
-		<table border="1" cellpadding="10" cellspacing="0" class="my-table">
+		<table border="1" cellpadding="5" cellspacing="0" class="my-table">
 			<tr>
 				<td colspan="6">
 					<center>
