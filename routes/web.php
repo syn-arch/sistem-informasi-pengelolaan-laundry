@@ -67,3 +67,5 @@ Route::post('/transaksi/bayar_transaksi/{id}', 'TransaksiController@bayar_transa
 
 // laporan
 Route::get('/laporan', 'LaporanController@index');
+Route::get('/laporan/get_laporan', 'LaporanController@get_laporan');
+Route::get('/laporan/cetak_laporan/{dari_tanggal}/{sampai_tanggal}', 'LaporanController@cetak_laporan');

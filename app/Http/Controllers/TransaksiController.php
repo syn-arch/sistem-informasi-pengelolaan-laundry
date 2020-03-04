@@ -22,7 +22,7 @@ class TransaksiController extends Controller
     public function index()
     {
         $data['judul'] =  "Data transaksi";
-        $data['transaksi'] = Transaksi::all();
+        $data['transaksi'] = Transaksi::latest('id')->get();
 
         return view('transaksi.data-transaksi', $data);
     }
@@ -175,10 +175,10 @@ class TransaksiController extends Controller
         $data['data'] = Transaksi::find($id);
         $data['detail'] = DetailTransaksi::where('id_transaksi', $id)->get();
 
-        $pdf = PDF::loadview('transaksi.cetak_invoice', $data);
-        return $pdf->stream();
+        // $pdf = PDF::loadview('transaksi.cetak_invoice', $data);
+        // return $pdf->stream();
 
-        // return view('transaksi.cetak_invoice', $data);
+        return view('transaksi.cetak_invoice', $data);
     }
 
     public function destroy($id)
