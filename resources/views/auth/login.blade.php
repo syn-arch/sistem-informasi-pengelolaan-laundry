@@ -32,7 +32,7 @@
         <div class="cssload-speeding-wheel"></div>
     </div>
 
-    <section id="wrapper" class="login-register" style="background: url({{asset('eliteadmin/plugins/images/login-register.jpg')}});">
+    <section id="wrapper" class="login-register" style="background: url({{asset('eliteadmin/bg-login.jpg')}});">
         <div class="login-box">
             <div class="white-box">
                 <form class="form-horizontal form-material" id="loginform" action="{{route('login')}}" method="post">

@@ -19,6 +19,10 @@ use PDF;
 
 class TransaksiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $data['judul'] =  "Data transaksi";
@@ -31,7 +35,7 @@ class TransaksiController extends Controller
     {
         $data['judul']  = "Transaksi Baru";
         $data['member'] = Member::all();
-        $data['paket']  = Paket::all();
+        $data['paket']  = Paket::where('id_outlet', Auth::user()->id_outlet)->get();
         $data['total'] = DetailTransaksi::where('status', 'berlangsung')->sum('jumlah_harga');
 
         $record = DB::table('transaksi')->latest('id')->first();
@@ -157,7 +161,9 @@ class TransaksiController extends Controller
 
         $id_transaksi_next = Transaksi::max('id');
 
-        return redirect('/transaksi/invoice/' . $id_transaksi_next);
+        echo "<script>window.open('/transaksi/transaksi_baru','_blank')</script>";
+        echo "<script>window.open('/transaksi/cetak_invoice/".$id_transaksi_next."','_blank')</script>";
+        echo "<script>window.close()</script>";
     }
 
     public function invoice($id)

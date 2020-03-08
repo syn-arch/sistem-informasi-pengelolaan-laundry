@@ -26,11 +26,15 @@
     <link href="{{ asset('eliteadmin/css/colors/blue.css')}}" id="theme" rel="stylesheet">
     <script src="{{asset('js/sweetalert.min.js')}}"></script>
 </head>
-<body>
+<body onload="window.print()">
 
     <div class="row">
         <div class="col-md-6">
             <table class="table">
+                <tr>
+                    <th>Outlet</th>
+                    <td>{{$outlet->nama_outlet}}</td>
+                </tr>
                 <tr>
                     <th>Dari Tanggal</th>
                     <td>{{$dari_tanggal}}</td>
@@ -53,6 +57,7 @@
                 <tr>
                     <th>No</th>
                     <th>Tgl</th>
+                    <th>Kode Invoice</th>
                     <th>Tgl Dibayar</th>
                     <th>Member</th>
                     <th>Jumlah Bayar</th>
@@ -64,6 +69,7 @@
                 <tr>
                     <td>{{$no++}}</td>
                     <td>{{date('d-m-Y', strtotime($row->tgl))}}</td>
+                    <td>{{$row->kode_invoice}}</td>
                     <td>{{date('d-m-Y', strtotime($row->tgl_bayar))}}</td>
                     <td>{{$row->member->nama_member}}</td>
                     <td>{{"Rp. " . number_format($row->total_bayar)}}</td>

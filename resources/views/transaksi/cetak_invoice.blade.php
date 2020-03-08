@@ -6,7 +6,7 @@
 	<style>
 		* {
 			font-family: arial;
-			font-size: 10px;
+			font-size: 14px;
 		}
 
 		.container {
@@ -20,7 +20,7 @@
 
 	</style>
 </head>
-<body>
+<body onload="window.print();setTimeout('window.close()', 1000)">
 	<div class="container">
 		<table border="1" cellpadding="5" cellspacing="0" class="my-table">
 			<tr>

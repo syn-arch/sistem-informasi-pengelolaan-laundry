@@ -11,13 +11,17 @@
 			</div>
 			<div class="pull-right">
 				<a href="/laporan" class="btn btn-info"><i class="fa fa-arrow-left"></i> Kembali</a>
-				<a target="_blank" href="/laporan/cetak_laporan/{{$dari_tanggal_raw}}/{{$sampai_tanggal_raw}}" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Laporan</a>
+				<a target="_blank" href="/laporan/cetak_laporan/{{$outlet->id}}/{{$dari_tanggal_raw}}/{{$sampai_tanggal_raw}}" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Laporan</a>
 			</div><br><br>
 			<hr>
 			<div class="box-body">
 				<div class="row">
 					<div class="col-md-6">
 						<table class="table">
+							<tr>
+								<th>Outlet</th>
+								<td>{{$outlet->nama_outlet}}</td>
+							</tr>
 							<tr>
 								<th>Dari Tanggal</th>
 								<td>{{$dari_tanggal}}</td>
@@ -34,14 +38,16 @@
 					</div>
 				</div>
 				<div class="table-responsive">
-					<table class="table table-hover table-striped">
+					<table class="table table-hover table-striped tables">
 						<thead>
 							<tr>
 								<th>No</th>
 								<th>Tgl</th>
+								<th>Kode Invoice</th>
 								<th>Tgl Dibayar</th>
 								<th>Member</th>
 								<th>Jumlah Bayar</th>
+								<th><i class="fa fa-gears"></i></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -50,9 +56,13 @@
 							<tr>
 								<td>{{$no++}}</td>
 								<td>{{date('d-m-Y', strtotime($row->tgl))}}</td>
+								<td>{{$row->kode_invoice}}</td>
 								<td>{{date('d-m-Y', strtotime($row->tgl_bayar))}}</td>
 								<td>{{$row->member->nama_member}}</td>
 								<td>{{"Rp. " . number_format($row->total_bayar)}}</td>
+								<td>
+									<a href="/transaksi/invoice/{{$row->id}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+								</td>
 							</tr>
 							@endforeach
 						</tbody>
@@ -64,3 +74,12 @@
 </div>
 
 @endsection
+
+@push('js')
+<script>
+	$(function(){
+		$('.tables').DataTable()
+	})
+</script>
+
+@endpush

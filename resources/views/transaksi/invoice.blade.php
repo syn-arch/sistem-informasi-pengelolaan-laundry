@@ -99,7 +99,7 @@
                             </tr>
                             @endif
                             <tr>
-                                <td><a href="/transaksi/transaksi_baru" class="btn btn-primary btn-block"><i class="fa fa-arrow-left"></i> Kembali</a></td>
+                                <td><a href="/laporan" class="btn btn-primary btn-block"><i class="fa fa-arrow-left"></i> Kembali</a></td>
                                 <td></td>
                                 <td><a target="_blank" href="/transaksi/cetak_invoice/{{$data->id}}" class="btn btn-danger btn-block"><i class="fa fa-print"></i> Cetak</a></td>
                             </tr>

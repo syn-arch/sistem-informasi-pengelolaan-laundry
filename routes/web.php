@@ -68,4 +68,10 @@ Route::post('/transaksi/bayar_transaksi/{id}', 'TransaksiController@bayar_transa
 // laporan
 Route::get('/laporan', 'LaporanController@index');
 Route::get('/laporan/get_laporan', 'LaporanController@get_laporan');
-Route::get('/laporan/cetak_laporan/{dari_tanggal}/{sampai_tanggal}', 'LaporanController@cetak_laporan');
+Route::get('/laporan/cetak_laporan/{id_outlet}/{dari_tanggal}/{sampai_tanggal}', 'LaporanController@cetak_laporan');
+
+// profile
+Route::get('/profile', 'ProfileController@index');
+Route::post('/profile_update', 'ProfileController@profile_update');
+Route::get('/ubah_password', 'ProfileController@change_password');
+Route::post('/change_password_action', 'ProfileController@change_password_action');

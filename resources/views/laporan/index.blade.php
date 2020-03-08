@@ -13,12 +13,20 @@
 					<div class="col-md-6 offset-md-3">
 						<form action="/laporan/get_laporan">
 							<div class="form-group">
+								<label for="id_outlet">Outlet</label>
+								<select name="id_outlet" id="id_outlet" class="form-control">
+									@foreach($outlet as $row)
+									<option value="{{$row->id}}">{{$row->nama_outlet}}</option>
+									@endforeach
+								</select>
+							</div>
+							<div class="form-group">
 								<label for="dari_tanggal">Dari Tanggal</label>
-								<input type="datetime-local" class="form-control" name="dari_tanggal">
+								<input type="date" class="form-control" name="dari_tanggal">
 							</div>
 							<div class="form-group">
 								<label for="sampai_tanggal">Sampai Tanggal</label>
-								<input type="datetime-local" class="form-control" name="sampai_tanggal">
+								<input type="date" class="form-control" name="sampai_tanggal">
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-info btn-block">Submit</button>
