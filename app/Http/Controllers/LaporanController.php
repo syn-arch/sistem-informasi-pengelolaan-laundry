@@ -77,6 +77,29 @@ class LaporanController extends Controller
         $data['bulan_ini'] = DB::select('SELECT SUM(total_bayar) AS bulan_ini FROM transaksi WHERE MONTH(tgl) = MONTH(NOW())')[0]->bulan_ini;
         $data['tahun_ini'] = DB::select('SELECT SUM(total_bayar) AS tahun_ini FROM transaksi WHERE YEAR(tgl) = YEAR(NOW())')[0]->tahun_ini;
 
+        $data['chart'] = DB::table('detail_transaksi')
+                              ->join('paket','detail_transaksi.id_paket','=','paket.id')
+                              ->select(DB::raw("nama_paket, SUM(qty) AS jumlah"))
+                              ->groupBy('paket.id')  
+                              ->get();
+
+        $data['graph'] = DB::select('SELECT MONTH(tgl) AS bulan, SUM(total_bayar) AS pendapatan FROM `transaksi` GROUP BY MONTH(tgl) ORDER BY tgl ASC');
+
+        $data['bulan'] = array(
+                '01' => 'JANUARI',
+                '02' => 'FEBRUARI',
+                '03' => 'MARET',
+                '04' => 'APRIL',
+                '05' => 'MEI',
+                '06' => 'JUNI',
+                '07' => 'JULI',
+                '08' => 'AGUSTUS',
+                '09' => 'SEPTEMBER',
+                '10' => 'OKTOBER',
+                '11' => 'NOVEMBER',
+                '12' => 'DESEMBER',
+        );
+
         return view('laporan.index', $data);
     }
 

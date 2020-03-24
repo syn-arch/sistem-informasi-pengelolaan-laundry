@@ -85,5 +85,43 @@
 		</div>
 	</div>
 </div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="white-box">
+			<h3 class="box-title">Transaksi paket terbanyak</h3>
+			<div id="morris-donut-chart"></div>
+		</div>
+	</div>
+</div>
 
 @endsection
+
+@push('js')
+<script>
+
+	$(function(){
+
+		Morris.Donut({
+			element: 'morris-donut-chart',
+			data: [
+
+			<?php foreach($chart as $row) : ?>
+				{
+					label: "<?php echo $row->nama_paket ?>",
+					value: <?php echo $row->jumlah ?>
+				},
+
+			<?php endforeach; ?>
+
+			],
+			resize: true,
+			colors:['#99d683', '#13dafe', '#6164c1']
+		});
+
+    })
+	
+
+</script>
+@endpush
