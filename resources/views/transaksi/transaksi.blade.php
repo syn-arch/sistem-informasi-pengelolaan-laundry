@@ -95,7 +95,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="batas_waktu">Batas Waktu</label>
-							<input type="date" class="form-control batas_waktu" name="batas_waktu" id="batas_waktu" placeholder="Batas Waktu" value="{{ old('batas_waktu') }}">
+							<input type="date" class="form-control batas_waktu" name="batas_waktu" id="batas_waktu" placeholder="Batas Waktu" value="{{ old('batas_waktu') }}" required="">
 							@error('batas_waktu')
 							<small style="color:red">{{$message}}</small>
 							@enderror

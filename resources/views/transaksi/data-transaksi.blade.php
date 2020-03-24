@@ -63,7 +63,7 @@
                                            </select>
                                        </td>
                                        <td>
-                                        <a href="/transaksi/invoice/{{$row->id}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                                        <a href="/transaksi/invoice/{{$row->id}}?link=transaksi" class="btn btn-info"><i class="fa fa-eye"></i></a>
                                         <a href="#bayar-modal" data-toggle="modal" data-id="{{$row->id}}" class="btn btn-primary bayar {{$row->dibayar == 'Belum Dibayar' ?: 'disabled'}}"><i class="fa fa-dollar"></i></a>
                                         <a href="/transaksi/destroy/{{$row->id}}" class="btn btn-danger hapus-transaksi"><i class="fa fa-trash"></i></a>
                                     </td>
@@ -163,6 +163,8 @@
                     success: function(datas){
                         $('.form-bayar').attr('action', '/transaksi/bayar_transaksi/'+id)
                         $('.total_bayar').val(datas)
+                        $('.tunai').val('')
+                        $('.kembalian').val('')
                     }
                 })
             })

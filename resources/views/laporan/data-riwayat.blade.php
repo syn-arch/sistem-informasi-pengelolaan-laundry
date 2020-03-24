@@ -11,7 +11,7 @@
 			</div>
 			<div class="pull-right">
 				<a href="/laporan" class="btn btn-info"><i class="fa fa-arrow-left"></i> Kembali</a>
-				<a target="_blank" href="/laporan/cetak_laporan/{{$outlet->id}}/{{$dari_tanggal_raw}}/{{$sampai_tanggal_raw}}" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Laporan</a>
+				<a target="_blank" href="/laporan/cetak_riwayat/{{$outlet->id}}/{{$dari_tanggal_raw}}/{{$sampai_tanggal_raw}}" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Laporan</a>
 			</div><br><br>
 			<hr>
 			<div class="box-body">
@@ -42,9 +42,9 @@
 						<thead>
 							<tr>
 								<th>No</th>
-								<th>Tgl</th>
-								<th>Kode Invoice</th>
-								<th>Tgl Dibayar</th>
+								<th>Nama Paket</th>
+								<th>Total Transaksi</th>
+								<th>Pendapatan</th>
 								<th>Member</th>
 								<th>Jumlah Bayar</th>
 								<th><i class="fa fa-gears"></i></th>
@@ -52,7 +52,7 @@
 						</thead>
 						<tbody>
 							<?php $no=1 ?>
-							@foreach($laporan as $row)
+							@foreach($riwayat as $row)
 							<tr>
 								<td>{{$no++}}</td>
 								<td>{{date('d-m-Y', strtotime($row->tgl))}}</td>
@@ -61,7 +61,7 @@
 								<td>{{$row->member->nama_member}}</td>
 								<td>{{"Rp. " . number_format($row->total_bayar)}}</td>
 								<td>
-									<a href="/transaksi/invoice/{{$row->id}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+									<a href="/transaksi/invoice/{{$row->id}}?link=laporan/riwayat" class="btn btn-info"><i class="fa fa-eye"></i></a>
 								</td>
 							</tr>
 							@endforeach

@@ -65,7 +65,7 @@
             </thead>
             <tbody>
                 <?php $no=1 ?>
-                @foreach($laporan as $row)
+                @foreach($riwayat as $row)
                 <tr>
                     <td>{{$no++}}</td>
                     <td>{{date('d-m-Y', strtotime($row->tgl))}}</td>

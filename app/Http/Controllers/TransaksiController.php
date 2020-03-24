@@ -136,7 +136,7 @@ class TransaksiController extends Controller
         $trs->id_user = Auth::id();
         $trs->id_outlet = User::find(Auth::id())->id_outlet;
         $trs->id_member = $request->id_member;
-        $trs->tgl = date('Y-m-d');
+        $trs->tgl = date('Y-m-d h:i:s');
         $trs->biaya_tambahan = $request->biaya_tambahan;
         $trs->diskon = $request->diskon;
         $trs->pajak = $request->pajak;
